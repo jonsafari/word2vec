@@ -1,0 +1,7 @@
+*.[oa~]
+.*.sw[op]
+compute-accuracy
+distance
+word-analogy
+word2phrase
+word2vec

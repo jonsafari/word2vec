@@ -28,7 +28,6 @@ int main(int argc, char **argv) {
   char file_name[max_size], st[100][max_size];
   float dist, len, bestd[N], vec[max_size];
   long long words, size, a, b, c, d, cn, bi[100];
-  char ch;
   float *M;
   char *vocab;
   if (argc < 2) {
@@ -67,7 +66,7 @@ int main(int argc, char **argv) {
   while (1) {
     for (a = 0; a < N; a++) bestd[a] = 0;
     for (a = 0; a < N; a++) bestw[a][0] = 0;
-    printf("Enter three words (EXIT to break): ");
+    printf("Enter three words (EXIT or CTRL-d to break): ");
     a = 0;
     while (1) {
       st1[a] = fgetc(stdin);
@@ -77,7 +76,10 @@ int main(int argc, char **argv) {
       }
       a++;
     }
-    if (!strcmp(st1, "EXIT")) break;
+    if ((!strcmp(st1, "EXIT")) || st1[0] == -1) {
+		printf("\n");
+		break;
+	}
     cn = 0;
     b = 0;
     c = 0;

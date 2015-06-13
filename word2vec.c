@@ -376,7 +376,7 @@ void *TrainModelThread(void *id) {
       last_word_count = word_count;
       if ((debug_mode > 1)) {
         now=clock();
-        printf("%cAlpha: %f  Progress: %.2f%%  Words/thread/sec: %.2fk  ", 13, alpha,
+        printf("%cAlpha: %f  Progress: %.1f%%  Words/thread/sec: %.1fk  ", 13, alpha,
          word_count_actual / (real)(iter * train_words + 1) * 100,
          word_count_actual / ((real)(now - start + 1) / (real)CLOCKS_PER_SEC * 1000));
         fflush(stdout);
@@ -592,6 +592,7 @@ void TrainModel() {
       for (c = 0; c < vocab_size; c++) {
         closev = -10;
         closeid = 0;
+		//#pragma omp parallel for private(d) shared(x,b,c) num_threads(4) reduction(max:x) reduction()
         for (d = 0; d < clcn; d++) {
           x = 0;
           for (b = 0; b < layer1_size; b++) x += cent[layer1_size * d + b] * syn0[c * layer1_size + b];
